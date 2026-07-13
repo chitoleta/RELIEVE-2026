@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa y Ubicación - RELIEVE 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(0,0,0,.85), rgba(0,0,0,.85)), url("RELIEVEIMAGEN.jpeg");
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+            background-color: #000;
+            background-attachment: fixed;
+            color: white;
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            text-shadow: 0 3px 10px rgba(0,0,0,.6);
+        }
+
+        /* Contenedor responsivo para las dos secciones (Plano y Google Maps) */
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            width: 100%;
+            max-width: 1100px;
+            justify-content: center;
+        }
+
+        /* Tarjetas para cada mapa */
+        .map-card {
+            background: rgba(255, 255, 255, 0.95);
+            color: black;
+            border-radius: 20px;
+            padding: 20px;
+            flex: 1;
+            min-width: 320px;
+            max-width: 520px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .map-card h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #111;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+            width: 100%;
+            padding-bottom: 8px;
+        }
+
+        /* Contenedor de la imagen del plano */
+        .img-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Contenedor responsivo para Google Maps */
+        .google-maps-container {
+            width: 100%;
+            overflow: hidden;
+            padding-bottom: 85%; /* Relación de aspecto para el cuadro */
+            position: relative;
+            height: 0;
+            border-radius: 12px;
+        }
+
+        .google-maps-container iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            border: 0;
+        }
+
+        /* Botón de regreso */
+        .back-btn {
+            margin-top: 40px;
+            background: white;
+            color: black;
+            padding: 14px 35px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+            transition: all .3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,.3);
+            cursor: pointer;
+            border: none;
+        }
+
+        .back-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,.4);
+        }
+
+        .back-btn:active {
+            transform: scale(1.02);
+        }
+
+        /* Ajustes para pantallas pequeñas (Celulares) */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 10px;
+                background-attachment: scroll;
+            }
+            h1 { 
+                font-size: 28px; 
+                margin-bottom: 25px; 
+            }
+            .grid-container { 
+                flex-direction: column; 
+                gap: 20px; 
+            }
+            .map-card { 
+                padding: 15px; 
+                min-width: unset; 
+                width: 100%; 
+            }
+            .map-card h2 { 
+                font-size: 18px; 
+            }
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 14px;
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ubicación del Congreso</h1>
+
+    <div class="grid-container">
+        
+        <div class="map-card">
+            <h2>Plano del Centro de Conferencias</h2>
+            <div class="img-container">
+                <img src="MAPAUCDAVIS.png" alt="Plano del Centro de Conferencias UC Davis">
+            </div>
+        </div>
+
+        <div class="map-card">
+            <h2>Ubicación en Google Maps</h2>
+            <div class="google-maps-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3356.6698245983753!2d-121.7498558238277!3d38.53442607180381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80852913cfe8b4ad%3A0x5f685aba0dedd2a6!2sUC%20Davis%20Conference%20Center!5e1!3m2!1ses-419!2smx!4v1783099219478!5m2!1ses-419!2smx" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-btn">← Volver al Menú</a>
+
+</body>
+</html>

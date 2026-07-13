@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué está pasando hoy?</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 15px;
+            background: #111;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        /* Contenedor flexible para separar las imágenes verticalmente */
+        #contenido {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; /* Espacio de separación entre cada imagen */
+        }
+
+        img {
+            width: 100%;
+            max-width: 450px;
+            height: auto;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,.5);
+        }
+
+        .boton {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background: white;
+            color: black;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 id="titulo"></h1>
+
+    <div id="contenido"></div>
+
+    <div>
+        <a href="index.html" class="boton">← Regresar</a>
+    </div>
+
+    <script>
+        // 1. Forzamos la obtención de la fecha adaptada a la zona horaria de Davis (America/Los_Angeles)
+        const opcionesHora = { timeZone: 'America/Los_Angeles', day: 'numeric', month: 'numeric' };
+        const fechaCalifornia = new Intl.DateTimeFormat('en-US', opcionesHora).format(new Date());
+
+        // fechaCalifornia devuelve una cadena tipo "7/23" (mes/día)
+        const [mesCalculado, diaCalculado] = fechaCalifornia.split('/').map(Number);
+
+        // Asignamos las variables validadas
+        const dia = diaCalculado;
+        const esJulio = mesCalculado === 7; // Ajustado para Julio (Mes 7)
+
+        // 2. Definición del programa por días del mes de julio
+        const programas = {
+            23: {
+                titulo: "Presentaciones del 23 de julio",
+                imagenes: [
+                    "IMAGEN23_1.png",
+                    "IMAGEN23_2.png",
+                    "IMAGEN23_3.png",
+                    "IMAGEN23_4.png",
+                    "IMAGEN23_5.png",
+                    "IMAGEN23_6.png",
+                    "IMAGEN23_7.png",
+                    "IMAGEN23_8.png",
+                    "IMAGEN23_9.png"
+                ]
+            },
+            24: {
+                titulo: "Presentaciones del 24 de julio",
+                imagenes: [
+                    "IMAGEN24_22.png",
+                    "IMAGEN24_32.png",
+                    "IMAGEN24_42.png",
+                    "IMAGEN24_52.png",
+                ]
+            }
+        };
+
+        // 3. Validación final utilizando el tiempo real de California
+        if (esJulio && programas[dia]) {
+            document.getElementById("titulo").innerText = programas[dia].titulo;
+            
+            // Generamos dinámicamente las etiquetas <img>
+            const htmlImagenes = programas[dia].imagenes.map(imgUrl => {
+                return `<img src="${imgUrl}" alt="Programa del día ${dia}">`;
+            }).join(''); 
+            
+            document.getElementById("contenido").innerHTML = htmlImagenes;
+
+        } else {
+            // Mensaje de respaldo si no es un día del congreso
+            document.getElementById("titulo").innerText = "RELIEVE 2026";
+            document.getElementById("contenido").innerHTML = "<div id='mensaje' style='margin-top:20px; color:#aaa;'>Hoy no hay actividades programadas.</div>";
+        }
+    </script>
+
+</body>
+</html>
