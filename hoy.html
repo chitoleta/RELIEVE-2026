@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Qué está pasando hoy?</title>
+    <title>What's Happening Today?</title>
 
     <style>
         body {
@@ -20,12 +20,12 @@
             font-size: 22px;
         }
 
-        /* Contenedor flexible para separar las imágenes verticalmente */
-        #contenido {
+        /* Flexible container to separate images vertically */
+        #content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px; /* Espacio de separación entre cada imagen */
+            gap: 20px; /* Vertical space between images */
         }
 
         img {
@@ -38,7 +38,7 @@
             box-shadow: 0 0 20px rgba(0,0,0,.5);
         }
 
-        .boton {
+        .button {
             display: inline-block;
             margin-top: 25px;
             padding: 12px 25px;
@@ -53,96 +53,94 @@
 
 <body>
 
-    <h1 id="titulo"></h1>
+    <h1 id="title"></h1>
 
-    <div id="contenido"></div>
+    <div id="content"></div>
 
     <div>
-        <a href="index.html" class="boton">← Regresar</a>
+        <a href="index.html" class="button">← Back</a>
     </div>
 
     <script>
-        // 1. Forzamos la obtención de la fecha adaptada a la zona horaria de Davis (America/Los_Angeles)
-        const opcionesHora = { timeZone: 'America/Los_Angeles', day: 'numeric', month: 'numeric' };
-        const fechaCalifornia = new Intl.DateTimeFormat('en-US', opcionesHora).format(new Date());
+        // 1. Force date retrieval adjusted to Davis timezone (America/Los_Angeles)
+        const timeOptions = { timeZone: 'America/Los_Angeles', day: 'numeric', month: 'numeric' };
+        const californiaDate = new Intl.DateTimeFormat('en-US', timeOptions).format(new Date());
 
-        // fechaCalifornia devuelve una cadena tipo "7/23" (mes/día)
-        const [mesCalculado, diaCalculado] = fechaCalifornia.split('/').map(Number);
+        // californiaDate returns a string like "7/23" (month/day)
+        const [calculatedMonth, calculatedDay] = californiaDate.split('/').map(Number);
 
-        // Asignamos las variables validadas
-        const dia = diaCalculado;
-        const esJulio = mesCalculado === 7; // Ajustado para Julio (Mes 7)
+        // Assign validated variables
+        const day = calculatedDay;
+        const isJuly = calculatedMonth === 7; // Set for July (Month 7)
 
-        // 2. Definición del programa por días del mes de julio (del 20 al 24)
-        const programas = {
+        // 2. Schedule definition by days in July (20th to 24th)
+        const schedule = {
             20: {
-                titulo: "Presentaciones del 20 de julio",
-                imagenes: [
-                    "IMAGEN20_1.png",
-                    "IMAGEN20_2.png",
-                    "IMAGEN20_3.png"
-                    
+                title: "July 20 Presentations",
+                images: [
+                    "IMAGE20_1.png",
+                    "IMAGE20_2.png",
+                    "IMAGE20_3.png"
                 ]
             },
             21: {
-                titulo: "Presentaciones del 21 de julio",
-                imagenes: [
-                    "IMAGEN21_1.png",
-                    "IMAGEN21_2.png",
-                    "IMAGEN21_3.png",
-                    "IMAGEN21_4.png"
+                title: "July 21 Presentations",
+                images: [
+                    "IMAGE21_1.png",
+                    "IMAGE21_2.png",
+                    "IMAGE21_3.png",
+                    "IMAGE21_4.png"
                 ]
             },
             22: {
-                titulo: "Presentaciones del 22 de julio",
-                imagenes: [
-                    "IMAGEN22_1.png",
-                    "IMAGEN22_2.png"
+                title: "July 22 Presentations",
+                images: [
+                    "IMAGE22_1.png",
+                    "IMAGE22_2.png"
                 ]
             },
             23: {
-                titulo: "Presentaciones del 23 de julio",
-                imagenes: [
-                    "IMAGEN23_1.png",
-                    "IMAGEN23_2.png",
-                    "IMAGEN23_3.png",
-                    "IMAGEN23_4.png",
-                    "IMAGEN23_5.png",
-                    "IMAGEN23_6.png",
-                    "IMAGEN23_7.png",
-                    "IMAGEN23_8.png",
-                    "IMAGEN23_9.png"
+                title: "July 23 Presentations",
+                images: [
+                    "IMAGE23_1.png",
+                    "IMAGE23_2.png",
+                    "IMAGE23_3.png",
+                    "IMAGE23_4.png",
+                    "IMAGE23_5.png",
+                    "IMAGE23_6.png",
+                    "IMAGE23_7.png",
+                    "IMAGE23_8.png",
+                    "IMAGE23_9.png"
                 ]
             },
             24: {
-                titulo: "Presentaciones del 24 de julio",
-                imagenes: [
-                    "IMAGEN24_22.png",
-                    "IMAGEN24_32.png",
-                    "IMAGEN24_42.png",
-                    "IMAGEN24_52.png"
+                title: "July 24 Presentations",
+                images: [
+                    "IMAGE24_22.png",
+                    "IMAGE24_32.png",
+                    "IMAGE24_42.png",
+                    "IMAGE24_52.png"
                 ]
             }
         };
 
-        // 3. Validación final utilizando el tiempo real de California
-        if (esJulio && programas[dia]) {
-            document.getElementById("titulo").innerText = programas[dia].titulo;
+        // 3. Final validation using California real-time
+        if (isJuly && schedule[day]) {
+            document.getElementById("title").innerText = schedule[day].title;
             
-            // Generamos dinámicamente las etiquetas <img>
-            const htmlImagenes = programas[dia].imagenes.map(imgUrl => {
-                return `<img src="${imgUrl}" alt="Programa del día ${dia}">`;
+            // Dynamically generate <img> tags
+            const htmlImages = schedule[day].images.map(imgUrl => {
+                return `<img src="${imgUrl}" alt="Schedule for July ${day}">`;
             }).join(''); 
             
-            document.getElementById("contenido").innerHTML = htmlImagenes;
+            document.getElementById("content").innerHTML = htmlImages;
 
         } else {
-            // Mensaje de respaldo si no es un día del congreso
-            document.getElementById("titulo").innerText = "RELIEVE 2026";
-            document.getElementById("contenido").innerHTML = "<div id='mensaje' style='margin-top:20px; color:#aaa;'>Hoy no hay actividades programadas.</div>";
+            // Fallback message if it's not a conference day
+            document.getElementById("title").innerText = "RELIEVE 2026";
+            document.getElementById("content").innerHTML = "<div id='message' style='margin-top:20px; color:#aaa;'>No activities scheduled for today.</div>";
         }
     </script>
 
 </body>
-</html>
 </html>
